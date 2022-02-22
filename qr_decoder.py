@@ -26,12 +26,11 @@ def main():
 
     if len(sys.argv) > 1:
         f = ''.join(sys.argv[1:])
-        if exists_isFile(f):
-            decode(f)
     else:
-        f = input('Please enter abosolute or relative file path: ')
-        if exists_isFile(f):
-            decode(f)
+        f = input('Please enter absolute or relative file path: ')
+
+    if exists_isFile(f):
+        decode(f)
 
 
 if __name__ == '__main__':
