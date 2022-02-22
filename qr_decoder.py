@@ -1,11 +1,13 @@
-
 import sys
 import os
 import cv2
 
 
-def decode(filename):
+def exists_isFile(f):
+    return os.path.exists(f) and os.path.isfile(f)
 
+
+def decode(filename):
     # read the QRCODE image
     image = cv2.imread(filename)
     # initialize the cv2 QRCode detector
@@ -13,7 +15,6 @@ def decode(filename):
     # detect and decode
     data, vertices_array, binary_qrcode = detector.detectAndDecode(image)
     # if there is a QR code
-    # print the data
     if vertices_array is not None:
         print("QRCode data:")
         print(data)
@@ -25,10 +26,12 @@ def main():
 
     if len(sys.argv) > 1:
         f = ''.join(sys.argv[1:])
-        if os.path.exists(f) and os.path.isfile(f):
+        if exists_isFile(f):
             decode(f)
     else:
-        pass
+        f = input('Please enter abosolute or relative file path: ')
+        if exists_isFile(f):
+            decode(f)
 
 
 if __name__ == '__main__':
